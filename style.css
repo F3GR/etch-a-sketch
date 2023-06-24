@@ -44,21 +44,27 @@ h1 {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    padding: 5px;
+}
+
+.sketchpad-header {
     align-items: center;
 }
 
-
-
-.left {
+.sketchpad-footer > * {
+    flex: 1;
     border: 1px solid red;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
 }
 
-.right {
-    border: 1px solid red;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+.sketchpad-footer > .empty-small {
+    flex: 0.5;
 }
+
+.sketchpad-footer > .empty {
+    flex: 4;
+}
+
+.sketchpad-footer > .grid-input {
+    flex: 2;
+}
+

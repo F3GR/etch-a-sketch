@@ -4,6 +4,7 @@ let gridGenerated = false;
 const selectNewGridButton = document.querySelector('.new-grid-button');
 const selectNewGridInput = document.querySelector('.new-grid-input');
 const selectGridField = document.querySelector('.sketchpad-grid');
+let selectGrids;
 
 selectNewGridButton.addEventListener("click", function(e) {
     e.preventDefault();
@@ -14,12 +15,24 @@ selectNewGridButton.addEventListener("click", function(e) {
         selectAllCells.forEach(cell => { cell.classList.add("white-colored") });
     } else {
         currentGridNumber = selectNewGridInput.value;
+        selectGrids = document.querySelectorAll('.generated');
         generateNewGrid.call(this);
+        addEventListenersForEachGrid();
         gridGenerated = true;
     }
 });
 
-
+function addEventListenersForEachGrid() {
+    selectGridField.addEventListener("click", function(e) {
+        const clickedGrid = e.target;
+        if (clickedGrid.classList.contains("generated")) {
+            if (clickedGrid.style.backgroundColor === 'white') {
+                clickedGrid.classList.remove("white-colored");
+                clickedGrid.classList.add("black-colored");
+            }
+        }
+    });
+ };
 
 function generateNewGrid() {
     alert("Generating");

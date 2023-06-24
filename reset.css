@@ -1,9 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    font-size: 1rem;
     box-sizing: border-box;
-    size: 100%;
 }
 
 *::not(img),
@@ -15,7 +13,7 @@
 }
 
 body {
-    min-height: 100vh;
+    max-height: 100vh;
 }
 
 img, picture, video, canvas, svg {

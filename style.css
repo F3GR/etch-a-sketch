@@ -10,16 +10,16 @@ body {
 }
 
 .sketchpad {
-    width: 800px;
+    width: 500px;
     height: 500px;
     margin: 30px auto 10px;
     align-content: center;
-    background-image:
-    linear-gradient(
+    background-image: linear-gradient(
       to top right, 
       rgba(138, 0, 0, 0.994), #8d3e01
     );
     border-radius: 20px;
+    box-shadow: 0 0 5px 5px rgb(75, 74, 74);
 }
 
 h1 {
@@ -33,19 +33,18 @@ h1 {
 }
 
 .sketchpad-grid {
-    width: 700px;
+    width: 400px;
     height: 400px;
     margin: 0 50px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     background-color: whitesmoke;
     border: 1px solid darkgray;
 }
 
 .sketchpad-header,
 .sketchpad-footer {
-    width: 800px;
+    width: 500px;
     height: 50px;
     display: flex;
     flex-direction: row;
@@ -89,7 +88,7 @@ button.darkening-mode {
     background-color: grey;
 }
 
-input.grid-input {
+.new-grid-input {
     width: 65px;
     height: 30px;
     border-radius: 5px;
@@ -99,13 +98,30 @@ input.grid-input {
     font-weight: normal;
 }
 
-input.grid-input::-webkit-outer-spin-button,
-input.grid-input::-webkit-inner-spin-button {
+.new-grid-input::-webkit-outer-spin-button,
+.new-grid-input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-input.grid-input {
+.new-grid-input {
     -moz-appearance: textfield;
 }
 
+.sketchpad-grid > * {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    border-collapse: collapse;
+}
+
+.generated {
+    aspect-ratio: 1/1;
+    flex: 1;
+    border: 0.05px solid black;
+    border-collapse: collapse;
+}
+
+.white-colored {
+    background-color:whitesmoke;
+}

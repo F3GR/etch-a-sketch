@@ -4,10 +4,10 @@ let gridGenerated = false;
 const selectNewGridButton = document.querySelector('.new-grid-button');
 const selectNewGridInput = document.querySelector('.new-grid-input');
 const selectGridField = document.querySelector('.sketchpad-grid');
+const selectNonGridElements = document.querySelectorAll('html > *, body > *');
 let selectGrids;
 
 let mousedown = false;
-let mouseup = false;
 
 let colorMode = false;
 let darkeningMode = false;
@@ -54,24 +54,25 @@ function addEventListenersForEachGrid() {
             clickedGrid.classList.remove("white-colored");
             clickedGrid.classList.add("black-colored");
         }
-        selectGrids.forEach(grid => grid.addEventListener("mouseover", function(e) {
-            e.stopImmediatePropagation();
-            e.preventDefault();
-            const clickedGrid = e.target;
-            if (mousedown === true && clickedGrid.classList.contains('white-colored')) {
-                clickedGrid.classList.remove("white-colored");
-                clickedGrid.classList.add("black-colored");
-            }
-        }));
-        selectGrids.forEach(grid => grid.addEventListener("mouseup", function(e) {
-            e.stopImmediatePropagation();
-            e.preventDefault();
-            const clickedGrid = e.target;
-            if (clickedGrid.classList.contains('white-colored')) {
-                clickedGrid.classList.remove("white-colored");
-                clickedGrid.classList.add("black-colored");
-            }
-            mousedown = false;
-        }));
+    }));
+    selectGrids.forEach(grid => grid.addEventListener("mouseover", function(e) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        const clickedGrid = e.target;
+        if (mousedown === true && clickedGrid.classList.contains('white-colored')) {
+            clickedGrid.classList.remove("white-colored");
+            clickedGrid.classList.add("black-colored");
+        }
+    }));
+
+    selectGrids.forEach(grid => grid.addEventListener("mouseup", function(e) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        mousedown = false;
+    }));
+    selectNonGridElements.forEach(element => element.addEventListener("mouseover", function(e) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        mousedown = false;
     }));
  };

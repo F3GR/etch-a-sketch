@@ -21,7 +21,10 @@ selectNewGridButton.addEventListener("click", function(e) {
         alert('Entered number is not valid, please pick a number from range 2-100, which is divisible by 2');
     } else if (currentGridNumber === selectNewGridInput.value) {
         const selectAllCells = document.querySelectorAll('.generated');
-        selectAllCells.forEach(cell => { cell.classList.add("white-colored") });
+        selectAllCells.forEach(cell => {
+            cell.classList.remove("black-colored"); 
+            cell.classList.add("white-colored"); 
+        });
     } else {
         currentGridNumber = selectNewGridInput.value;
         generateNewGrid.call(this);
@@ -29,8 +32,25 @@ selectNewGridButton.addEventListener("click", function(e) {
     }
 });
 
-toggleColorMode();
-toggleDarkeningMode();
+selectButtonColorMode.addEventListener("click", function(e) {
+    if (selectButtonColorMode.classList.contains('on')) {
+        selectButtonColorMode.classList.remove("on");
+        colorMode = false;
+    } else {
+        selectButtonColorMode.classList.add("on");
+        colorMode = true;
+    }
+});
+
+selectButtonDarkeningMode.addEventListener("click", function(e) {
+    if (selectButtonDarkeningMode.classList.contains('on')) {
+        selectButtonDarkeningMode.classList.remove("on");
+        darkeningMode = false;
+    } else {
+        selectButtonDarkeningMode.classList.add("on");
+        darkeningMode = true;
+    }
+});
 
 function generateNewGrid() {
     alert("Generating");
@@ -64,7 +84,6 @@ function addEventListenersForEachGrid() {
         const clickedGrid = e.target;
         drawAGrid(clickedGrid);
     }));
-
     selectGrids.forEach(grid => grid.addEventListener("mouseup", function(e) {
         e.stopImmediatePropagation();
         e.preventDefault();
@@ -77,30 +96,6 @@ function addEventListenersForEachGrid() {
     }));
  };
 
- function toggleColorMode() {
-    selectButtonColorMode.addEventListener("click", function(e) {
-        if (selectButtonColorMode.classList.contains('on')) {
-            selectButtonColorMode.classList.remove("on");
-            colorMode = false;
-        } else {
-            selectButtonColorMode.classList.add("on");
-            colorMode = true;
-        }
-    });
- }
-
- function toggleDarkeningMode() {
-    selectButtonDarkeningMode.addEventListener("click", function(e) {
-        if (selectButtonDarkeningMode.classList.contains('on')) {
-            selectButtonDarkeningMode.classList.remove("on");
-            darkeningMode = false;
-        } else {
-            selectButtonDarkeningMode.classList.add("on");
-            darkeningMode = true;
-        }
-    });
- }
-
 function drawAGrid(selectedGrid) {
     if (mousedown === true) {
         if (colorMode === false && darkeningMode === false) {
@@ -109,11 +104,17 @@ function drawAGrid(selectedGrid) {
                 selectedGrid.classList.add("black-colored");
             }
         } else if (colorMode === true && darkeningMode === false) {
-
+            if (selectedGrid.classList.contains('black-colored')) {
+                selectedGrid.classList.remove("black-colored");
+            }
         } else if (colorMode === false && darkeningMode === true) {
-
+            if (selectedGrid.classList.contains('black-colored')) {
+                selectedGrid.classList.remove("black-colored");
+            }
         } else {
-
+            if (selectedGrid.classList.contains('black-colored')) {
+                selectedGrid.classList.remove("black-colored");
+            }
         }
     }
 }

@@ -106,3 +106,35 @@ function addEventListenersForEachGrid() {
         }
     });
  }
+
+function drawAGrid() {
+    if (colorMode === false && darkeningMode === false) {
+
+    } else if (colorMode === true && darkeningMode === false) {
+
+    } else if (colorMode === false && darkeningMode === true) {
+
+    } else {
+
+    }
+}
+
+function generateRandomHSLColor(element) {
+    const randomH = Math.floor(Math.random * 366);
+    const S = 100;
+    const L = 100;
+    const HSL = `${randomH}, ${S}, ${L}`;
+    const randomHSLColor = element.style.backgroundColor('hsl(HSL)');
+    return randomHSLColor;
+}
+
+function darkenHSLColor(selectedElement) {
+    const backgroundColor = getComputedStyle(selectedElement).backgroundColor;
+    const hslValues = backgroundColor.match(/\d+/g);
+
+    let h = parseInt(hslValues[0]);
+    let s = parseInt(hslValues[1]);
+    let l = parseInt(hslValues[2]);
+
+    return l-10;
+}

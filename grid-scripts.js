@@ -22,7 +22,9 @@ selectNewGridButton.addEventListener("click", function(e) {
     } else if (currentGridNumber === selectNewGridInput.value) {
         const selectAllCells = document.querySelectorAll('.generated');
         selectAllCells.forEach(cell => {
-            cell.classList.remove("black-colored"); 
+            cell.classList.remove("black-colored");
+            cell.classList.remove("colored");
+            cell.style.backgroundColor = "";
             cell.classList.add("white-colored"); 
         });
     } else {
@@ -99,22 +101,30 @@ function addEventListenersForEachGrid() {
 function drawAGrid(selectedGrid) {
     if (mousedown === true) {
         if (colorMode === false && darkeningMode === false) {
-            if (selectedGrid.classList.contains('white-colored')) {
-                selectedGrid.classList.remove("white-colored");
-                selectedGrid.classList.add("black-colored");
-            }
+            selectedGrid.classList.remove("white-colored");
+            selectedGrid.style.backgroundColor = "";
+            selectedGrid.classList.add("black-colored");
+
         } else if (colorMode === true && darkeningMode === false) {
-            if (selectedGrid.classList.contains('black-colored')) {
-                selectedGrid.classList.remove("black-colored");
-            }
+            selectedGrid.classList.remove("white-colored");
+            selectedGrid.classList.remove("black-colored");
+            selectedGrid.style.backgroundColor = "";
+            selectedGrid.classList.add("colored");
+            generateRandomHSLColor(selectedGrid);
+            
         } else if (colorMode === false && darkeningMode === true) {
-            if (selectedGrid.classList.contains('black-colored')) {
-                selectedGrid.classList.remove("black-colored");
+            if (selectedGrid.classList.contains("colored") || selectedGrid.classList.contains("white-colored")) {
+                darkenHSLColor(selectedGrid);
             }
         } else {
-            if (selectedGrid.classList.contains('black-colored')) {
-                selectedGrid.classList.remove("black-colored");
-            }
+            if (selectedGrid.classList.contains("white-colored")) {
+                selectedGrid.classList.add("colored");
+                generateRandomHSLColor(selectedGrid);
+                darkenHSLColor(selectedGrid);
+            } else if (selectedGrid.classList.contains("colored")) {
+                darkenHSLColor(selectedGrid);
+            };
+            selectedGrid.classList.remove("white-colored");
         }
     }
 }

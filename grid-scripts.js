@@ -9,7 +9,10 @@ let selectGrids;
 
 let mousedown = false;
 
+const selectButtonColorMode = document.querySelector('button.color-mode');
 let colorMode = false;
+
+const selectButtonDarkeningMode = document.querySelector('button.darkening-mode');
 let darkeningMode = false;
 
 selectNewGridButton.addEventListener("click", function(e) {
@@ -25,6 +28,9 @@ selectNewGridButton.addEventListener("click", function(e) {
         gridGenerated = true;
     }
 });
+
+toggleColorMode();
+toggleDarkeningMode();
 
 function generateNewGrid() {
     alert("Generating");
@@ -76,3 +82,27 @@ function addEventListenersForEachGrid() {
         mousedown = false;
     }));
  };
+
+ function toggleColorMode() {
+    selectButtonColorMode.addEventListener("click", function(e) {
+        if (selectButtonColorMode.classList.contains('on')) {
+            selectButtonColorMode.classList.remove("on");
+            colorMode = false;
+        } else {
+            selectButtonColorMode.classList.add("on");
+            colorMode = true;
+        }
+    });
+ }
+
+ function toggleDarkeningMode() {
+    selectButtonDarkeningMode.addEventListener("click", function(e) {
+        if (selectButtonDarkeningMode.classList.contains('on')) {
+            selectButtonDarkeningMode.classList.remove("on");
+            darkeningMode = false;
+        } else {
+            selectButtonDarkeningMode.classList.add("on");
+            darkeningMode = true;
+        }
+    });
+ }

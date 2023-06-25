@@ -85,7 +85,7 @@ button.color-mode {
 }
 
 button.darkening-mode {
-    background-color: grey;
+    background-color: rgb(53, 53, 53);
 }
 
 .new-grid-input {
@@ -118,14 +118,22 @@ button.darkening-mode {
 .generated {
     aspect-ratio: 1/1;
     flex: 1;
-    border: 0.05px solid black;
+    border: 0.05px solid hsl(0, 0%, 0%);
     border-collapse: collapse;
 }
 
 .white-colored {
-    background-color:whitesmoke;
+    background-color:hsl(0, 0%, 96%);
 }
 
 .black-colored {
-    background-color:black;
+    background-color:hsl(0, 0%, 0%);
+}
+
+.color-mode.on {
+    background: radial-gradient(rgb(255, 162, 162),rgb(3, 3, 255));
+}
+
+.darkening-mode.on {
+    background: radial-gradient(rgb(255, 162, 162),rgb(177, 177, 177));
 }

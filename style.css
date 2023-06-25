@@ -137,3 +137,7 @@ button.darkening-mode {
 .darkening-mode.on {
     background: radial-gradient(rgb(255, 162, 162),rgb(177, 177, 177));
 }
+
+.new-grid-input {
+    background-color: hsl(0, 0%, 90%);
+}

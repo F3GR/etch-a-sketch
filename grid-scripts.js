@@ -56,19 +56,13 @@ function addEventListenersForEachGrid() {
         e.preventDefault();
         const clickedGrid = e.target;
         mousedown = true;
-        if (clickedGrid.classList.contains('white-colored')) {
-            clickedGrid.classList.remove("white-colored");
-            clickedGrid.classList.add("black-colored");
-        }
+        drawAGrid(clickedGrid);
     }));
     selectGrids.forEach(grid => grid.addEventListener("mouseover", function(e) {
         e.stopImmediatePropagation();
         e.preventDefault();
         const clickedGrid = e.target;
-        if (mousedown === true && clickedGrid.classList.contains('white-colored')) {
-            clickedGrid.classList.remove("white-colored");
-            clickedGrid.classList.add("black-colored");
-        }
+        drawAGrid(clickedGrid);
     }));
 
     selectGrids.forEach(grid => grid.addEventListener("mouseup", function(e) {
@@ -107,34 +101,90 @@ function addEventListenersForEachGrid() {
     });
  }
 
-function drawAGrid() {
-    if (colorMode === false && darkeningMode === false) {
+function drawAGrid(selectedGrid) {
+    if (mousedown === true) {
+        if (colorMode === false && darkeningMode === false) {
+            if (selectedGrid.classList.contains('white-colored')) {
+                selectedGrid.classList.remove("white-colored");
+                selectedGrid.classList.add("black-colored");
+            }
+        } else if (colorMode === true && darkeningMode === false) {
 
-    } else if (colorMode === true && darkeningMode === false) {
+        } else if (colorMode === false && darkeningMode === true) {
 
-    } else if (colorMode === false && darkeningMode === true) {
+        } else {
 
-    } else {
-
+        }
     }
 }
 
-function generateRandomHSLColor(element) {
-    const randomH = Math.floor(Math.random * 366);
+function generateRandomHSLColor(selectedElement) {
+    const randomH = Math.floor(Math.random() * 361);
     const S = 100;
-    const L = 100;
-    const HSL = `${randomH}, ${S}, ${L}`;
-    const randomHSLColor = element.style.backgroundColor('hsl(HSL)');
-    return randomHSLColor;
+    const L = 50;
+    const HSL = `hsl(${randomH}, ${S}%, ${L}%)`;
+
+    selectedElement.style.backgroundColor = HSL;
 }
 
 function darkenHSLColor(selectedElement) {
-    const backgroundColor = getComputedStyle(selectedElement).backgroundColor;
+    const computedStyle = getComputedStyle(selectedElement);
+    const backgroundColor = computedStyle.backgroundColor;
     const hslValues = backgroundColor.match(/\d+/g);
 
-    let h = parseInt(hslValues[0]);
-    let s = parseInt(hslValues[1]);
-    let l = parseInt(hslValues[2]);
+    const r = parseInt(hslValues[0]);
+    const g = parseInt(hslValues[1]);
+    const b = parseInt(hslValues[2]);
 
-    return l-10;
+    const arrayHSL = hslToRgbColorSet(r, g, b);
+
+    const h = arrayHSL[0];
+    const s = arrayHSL[1];
+    const l = arrayHSL[2] - 10;
+
+    const HSL = `hsl(${h}, ${s}%, ${l}%)`;
+
+    selectedElement.style.backgroundColor = HSL;
+}
+
+function hslToRgbColorSet(r, g, b) {
+
+    r /= 255;
+    g /= 255;
+    b /= 255;
+
+    var max = Math.max(r, g, b);
+    var min = Math.min(r, g, b);
+
+    var h, s, l;
+
+    if (max === min) {
+        h = 0;
+    } else if (max === r) {
+        h = 60 * ((g - b) / (max - min));
+    } else if (max === g) {
+        h = 60 * ((b - r) / (max - min)) + 120;
+    } else if (max === b) {
+        h = 60 * ((r - g) / (max - min)) + 240;
+    }
+
+    if (h < 0) {
+        h += 360;
+    }
+
+    l = (max + min) / 2;
+
+    if (max === min) {
+        s = 0;
+    } else if (l <= 0.5) {
+        s = (max - min) / (2 * l);
+    } else {
+        s = (max - min) / (2 - 2 * l);
+    }
+
+    h = Math.round(h);
+    s = Math.round(s * 100);
+    l = Math.round(l * 100);
+
+    return [h, s, l];
 }

@@ -1,1 +1,1 @@
-An e-version of Etch-a-Sketch
+An e-version of the Etch-a-Sketch

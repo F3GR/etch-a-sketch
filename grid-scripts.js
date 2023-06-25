@@ -55,7 +55,6 @@ selectButtonDarkeningMode.addEventListener("click", function(e) {
 });
 
 function generateNewGrid() {
-    alert("Generating");
     selectGridField.innerHTML = "";
     for (let i = 0; i < currentGridNumber; i++) {
         let generatedRow = document.createElement('div');

@@ -6,6 +6,9 @@ const selectNewGridInput = document.querySelector('.new-grid-input');
 const selectGridField = document.querySelector('.sketchpad-grid');
 let selectGrids;
 
+let colorMode = false;
+let darkeningMode = false;
+
 selectNewGridButton.addEventListener("click", function(e) {
     e.preventDefault();
     if (selectNewGridInput.value <= 1 || selectNewGridInput.value > 100 || selectNewGridInput.value % 2 !== 0 ) {
@@ -47,5 +50,14 @@ function addEventListenersForEachGrid() {
             clickedGrid.classList.remove("white-colored");
             clickedGrid.classList.add("black-colored");
         }
+        selectGrids.forEach(grid => grid.addEventListener("mouseover", function(e) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+            const clickedGrid = e.target;
+            if (clickedGrid.classList.contains('white-colored')) {
+                clickedGrid.classList.remove("white-colored");
+                clickedGrid.classList.add("black-colored");
+            }
+        }));
     }));
  };

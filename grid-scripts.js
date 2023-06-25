@@ -151,7 +151,7 @@ function darkenHSLColor(selectedElement) {
 
     const h = arrayHSL[0];
     const s = arrayHSL[1];
-    const l = arrayHSL[2] - 10;
+    const l = arrayHSL[2] - 5;
 
     const HSL = `hsl(${h}, ${s}%, ${l}%)`;
 
